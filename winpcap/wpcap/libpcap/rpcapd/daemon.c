@@ -1036,7 +1036,12 @@ int serveropen_dp;							// keeps who is going to open the data connection
 		hints.ai_flags = AI_PASSIVE;
 
 		// Let's the server socket pick up a free network port for us
-		if (sock_initaddress(NULL, "0", &hints, &addrinfo, errbuf, PCAP_ERRBUF_SIZE) == -1)
+        // origin source:  pick up a random port, this may cause a problem, for firewall default INPUT chain drop packet that unexpected
+        // for sake of firewall of server {iptables INPUT default policy is DROP packets}, we specify a customed port that
+        // already make a firewall rule in order to connect to the port by client
+        // however, this cause another problem, only a client connection can be establised. 
+        // in some aspect, we think  it's a good thing, just for me
+		if (sock_initaddress(NULL, "3720", &hints, &addrinfo, errbuf, PCAP_ERRBUF_SIZE) == -1)
 			goto error;
 
 		if ( (sockdata= sock_open(addrinfo, SOCKOPEN_SERVER, 1 /* max 1 connection in queue */, errbuf, PCAP_ERRBUF_SIZE)) == -1)
