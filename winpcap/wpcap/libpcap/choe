@@ -1,0 +1,5 @@
+choe: origin git url
+
+git remote -v 
+origin  git://bpf.tcpdump.org/libpcap (fetch)
+origin  git://bpf.tcpdump.org/libpcap (push)
