@@ -681,7 +681,7 @@ int sock_bufferize(const char *buffer, int size, char *tempbuf, int *offset, int
 	{
 		if (errbuf)
 		{
-			snprintf(errbuf, errbuflen, "Not enough space in the temporary send buffer.");
+			snprintf(errbuf, errbuflen, "pid:%d :Not enough space in the temporary send buffer.", getpid());
 			errbuf[errbuflen - 1]= 0;
 		}
 
