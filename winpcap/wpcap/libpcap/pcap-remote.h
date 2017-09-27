@@ -96,7 +96,7 @@
 	\brief Buffer used by socket functions to send-receive packets.
 	In case you plan to have messages larger than this value, you have to increase it.
 */
-#define RPCAP_NETBUF_SIZE 64000
+#define RPCAP_NETBUF_SIZE 65536
 
 
 /*!
