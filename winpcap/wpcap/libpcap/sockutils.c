@@ -337,6 +337,15 @@ SOCKET sock;
 			}
 		} 
 #endif
+		int reused = 1;
+		socklen_t reused_len = sizeof(reused);
+		if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &reused, reused_len) == -1) {
+			if (errbuf) {
+				snprintf(errbuf, errbuflen, "setsockopt(SOL_REUSEADDR)");
+				errbuf[errbuflen - 1]= 0;
+			}
+			return -1;
+		}
 
 		// WARNING: if the address is a mcast one, I should place the proper Win32 code here
 		if (bind(sock, addrinfo->ai_addr, addrinfo->ai_addrlen) != 0)
